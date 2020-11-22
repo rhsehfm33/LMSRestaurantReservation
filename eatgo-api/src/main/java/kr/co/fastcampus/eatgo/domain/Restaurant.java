@@ -17,18 +17,27 @@ public class Restaurant {
 
     }
 
+    public Restaurant(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public Restaurant(Long id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public String getInformation() {
