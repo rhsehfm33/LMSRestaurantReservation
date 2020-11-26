@@ -24,7 +24,7 @@ public class ReviewController {
             @PathVariable Long restaurantsId,
             @Valid @RequestBody Review resource
     ) throws URISyntaxException {
-        Review review = reviewService.addReview(resource);
+        Review review = reviewService.addReview(restaurantsId, resource);
         String str = "/restaurants/" + restaurantsId + "/reviews/" + review.getId();
         return ResponseEntity.created(new URI(str)).body("{}");
     }
