@@ -36,7 +36,12 @@ public class RestaurantController {
         Long id = resource.getId();
         String name = resource.getName();
         String address = resource.getAddress();
-        Restaurant restaurant = new Restaurant(id, name, address);
+        Restaurant restaurant = Restaurant.builder()
+                .id(id)
+                .name(name)
+                .address(address)
+                .build();
+
         restaurantService.addRestaurant(restaurant);
 
         URI location = new URI("/restaurants/" + restaurant.getId());

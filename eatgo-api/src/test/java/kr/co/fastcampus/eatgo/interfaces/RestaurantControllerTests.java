@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.StringContains.containsString;
@@ -32,7 +33,13 @@ public class RestaurantControllerTests {
     @Test
     public void list() throws Exception {
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
-        restaurants.add(new Restaurant(1004L, "JOKER HOUSE", "Seoul"));
+        Restaurant restaurant = Restaurant.builder()
+                .id(1004L)
+                .name("JOKER HOUSE")
+                .address("Seoul")
+                .build();
+
+        restaurants.add(restaurant);
 
         given(restaurantService.getRestaurants()).willReturn(restaurants);
 
@@ -49,9 +56,21 @@ public class RestaurantControllerTests {
     @Test
     public void detail() throws Exception {
         List<Restaurant> restaurants = new ArrayList<Restaurant>();
-        restaurants.add(new Restaurant(1004L, "JOKER HOUSE", "Seoul"));
-        restaurants.get(0).addMenuItem(new MenuItem("Kimchi"));
-        restaurants.add(new Restaurant(2020L, "Cyber Food", "Seoul"));
+
+        Restaurant restaurant1 = Restaurant.builder()
+                .id(1004L)
+                .name("JOKER HOUSE")
+                .address("Seoul")
+                .build();
+        restaurants.add(restaurant1);
+        restaurants.get(0).setMenuItems(Arrays.asList(MenuItem.builder().name("Kimchi").build()));
+
+        Restaurant restaurant2 = Restaurant.builder()
+                .id(2020L)
+                .name("Cyber Food")
+                .address("Seoul")
+                .build();
+        restaurants.add(restaurant2);
 
         given(restaurantService.getRestaurant(1004L)).willReturn(restaurants.get(0));
         given(restaurantService.getRestaurant(2020L)).willReturn(restaurants.get(1));
@@ -82,7 +101,11 @@ public class RestaurantControllerTests {
 
     @Test
     public void create() throws Exception {
-        Restaurant restaurant = new Restaurant(1234L, "BeRyong", "Seoul");
+        Restaurant restaurant = Restaurant.builder()
+                .id(1234L)
+                .name("BeRyong")
+                .address("Seoul")
+                .build();
 
         mvc.perform(post("/restaurants")
                 .contentType(MediaType.APPLICATION_JSON)
