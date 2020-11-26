@@ -1,12 +1,12 @@
 package kr.co.fastcampus.eatgo.domain;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-class RestaurantTests {
+public class RestaurantTests {
     @Test
     public void creation() {
         // Restaurant restaurant = new Restaurant(1004L, "Bob zip", "Seoul");

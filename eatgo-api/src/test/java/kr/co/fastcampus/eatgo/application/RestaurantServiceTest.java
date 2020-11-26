@@ -1,8 +1,9 @@
 package kr.co.fastcampus.eatgo.application;
 
 import kr.co.fastcampus.eatgo.domain.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -12,13 +13,12 @@ import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
-
 public class RestaurantServiceTest {
 
+    @InjectMocks
     private RestaurantService restaurantService;
 
     @Mock
@@ -27,9 +27,9 @@ public class RestaurantServiceTest {
     @Mock
     private MenuItemRepository menuItemRepository;
 
-    @BeforeEach
+    @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
 
         mockRestaurantRepository();
         mockMenuItemRepository();
@@ -78,11 +78,9 @@ public class RestaurantServiceTest {
         assertThat(menuItem.getName(), is("Kimchi"));
     }
 
-    @Test
+    @Test(expected = RestaurantNotFoundException.class)
     public void getRestaurantWithNotExisted() {
-        assertThrows(RestaurantNotFoundException.class, () -> {
-            restaurantService.getRestaurant(404L);
-        });
+        restaurantService.getRestaurant(404L);
     }
 
     @Test
