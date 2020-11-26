@@ -1,11 +1,13 @@
 package kr.co.fastcampus.eatgo.domain;
 
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,10 @@ public class Restaurant {
     @Setter
     private Long id;
 
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private String address;
 
     @Transient
