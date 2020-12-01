@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
 import java.util.List;
 
 @Service
@@ -26,8 +25,8 @@ public class RestaurantService {
         this.reviewRepository = reviewRepository;
     }
 
-    public List<Restaurant> getRestaurants() {
-        List<Restaurant> restaurants = restaurantRepository.findAll();
+    public List<Restaurant> getRestaurants(String region) {
+        List<Restaurant> restaurants = restaurantRepository.findAllByAddressContaining(region);
 
         return restaurants;
     }

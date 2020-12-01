@@ -1,6 +1,5 @@
 package kr.co.fastcampus.eatgo.application;
 
-import kr.co.fastcampus.eatgo.application.RestaurantService;
 import kr.co.fastcampus.eatgo.domain.*;
 import kr.co.fastcampus.eatgo.domain.MenuItem;
 import org.junit.Before;
@@ -9,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +55,7 @@ public class RestaurantServiceTest {
 
         given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurants.get(0)));
 
-        given(restaurantRepository.findAll()).willReturn(restaurants);
+        given(restaurantRepository.findAllByAddressContaining("Seoul")).willReturn(restaurants);
     }
 
     private void mockMenuItemRepository() {
@@ -81,9 +79,12 @@ public class RestaurantServiceTest {
 
     @Test
     public void getRestaurants() {
-        List<Restaurant> restaurants = restaurantService.getRestaurants();
+        String region = "Seoul";
+
+        List<Restaurant> restaurants = restaurantService.getRestaurants(region);
 
         Restaurant restaurant = restaurants.get(0);
+
         assertThat(restaurant.getId(), is(1004L));
     }
 
@@ -129,14 +130,16 @@ public class RestaurantServiceTest {
 
     @Test
     public void updateRestaurant() {
+        List<Restaurant> restaurants = new ArrayList<>();
         Restaurant restaurant = Restaurant.builder()
                 .id(1004L)
                 .name("Bob zip")
                 .address("Seoul")
                 .build();
+        restaurants.add(restaurant);
 
-        given(restaurantRepository.findById(1004L))
-                .willReturn(Optional.of(restaurant));
+        given(restaurantRepository.findAllByAddressContaining("Seoul"))
+                .willReturn(restaurants);
 
         Restaurant updated = restaurantService.updateRestaurant(1004L, "Sool zip", "Busan");
 

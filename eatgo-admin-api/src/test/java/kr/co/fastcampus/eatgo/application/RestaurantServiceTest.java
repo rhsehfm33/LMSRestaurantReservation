@@ -46,12 +46,12 @@ public class RestaurantServiceTest {
 
         given(restaurantRepository.findById(1004L)).willReturn(Optional.of(restaurants.get(0)));
 
-        given(restaurantRepository.findAll()).willReturn(restaurants);
+        given(restaurantRepository.findAllByAddressContaining("Seoul")).willReturn(restaurants);
     }
 
     @Test
     public void getRestaurants() {
-        List<Restaurant> restaurants = restaurantService.getRestaurants();
+        List<Restaurant> restaurants = restaurantService.getRestaurants("Seoul");
 
         Restaurant restaurant = restaurants.get(0);
         assertThat(restaurant.getId(), is(1004L));
