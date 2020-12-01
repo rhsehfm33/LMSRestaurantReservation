@@ -19,13 +19,6 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @GetMapping("/reviews")
-    public List<Review> list() {
-        List<Review> reviews = reviewService.getReviews();
-
-        return reviews;
-    }
-
     @PostMapping("/restaurants/{restaurantsId}/reviews")
     public ResponseEntity<?> create(
             @PathVariable Long restaurantsId,

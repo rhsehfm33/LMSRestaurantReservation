@@ -29,4 +29,9 @@ public class ReviewControllerTests {
     @MockBean
     private ReviewService reviewService;
 
+    @Test
+    public void dummy() {
+
+    }
+
 }
