@@ -10,13 +10,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,20 +42,5 @@ public class RegionControllerTests {
         mvc.perform(get("/regions"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Seoul")));
-    }
-
-    @Test
-    public void create() throws Exception {
-        Region region =  Region.builder().name("Seoul").build();
-
-        given(regionService.addRegion("Seoul")).willReturn(region);
-
-        mvc.perform(post("/regions")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\" : \"Seoul\"}"))
-                .andExpect(status().isCreated())
-                .andExpect(content().string("{}"));
-
-        verify(regionService).addRegion("Seoul");
     }
 }
