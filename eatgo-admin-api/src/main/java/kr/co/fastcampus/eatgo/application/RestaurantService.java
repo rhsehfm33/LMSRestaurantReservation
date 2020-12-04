@@ -17,8 +17,8 @@ public class RestaurantService {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public List<Restaurant> getRestaurants(String region) {
-        List<Restaurant> restaurants = restaurantRepository.findAllByAddressContaining(region);
+    public List<Restaurant> getRestaurants() {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
 
         return restaurants;
     }
