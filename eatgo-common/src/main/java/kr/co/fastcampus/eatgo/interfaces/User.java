@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@ToString
 @Entity
 @Getter
 @Builder
@@ -30,6 +31,8 @@ public class User {
     @Setter
     @NotNull
     private Long level;
+
+    private String password;
 
     public boolean isAdmin() {
         return level >= 100;

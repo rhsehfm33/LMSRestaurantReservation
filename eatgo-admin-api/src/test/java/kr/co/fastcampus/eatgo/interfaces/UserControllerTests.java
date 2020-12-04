@@ -33,10 +33,6 @@ public class UserControllerTests {
     @MockBean
     private UserService userService;
 
-    @Before
-    public void setMvc() {
-    }
-
     @Test
     public void list() throws Exception {
         List<User> users = new ArrayList<>();
