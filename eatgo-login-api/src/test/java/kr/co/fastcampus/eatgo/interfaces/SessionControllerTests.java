@@ -4,7 +4,6 @@ import kr.co.fastcampus.eatgo.application.EmailNotExistedException;
 import kr.co.fastcampus.eatgo.application.PasswordWrongException;
 import kr.co.fastcampus.eatgo.application.UserService;
 import kr.co.fastcampus.eatgo.utils.JwtUtil;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -40,17 +34,22 @@ public class SessionControllerTests {
     private UserService userService;
 
     @Test
-    public void createWithValidAttributes() throws Exception {
+    public void createRestaurantOwner() throws Exception {
         Long id = 1004L;
         String email = "tester@example.com";
         String name = "Tester";
         String password = "test";
 
-        User mockUser = User.builder().id(id).name(name).build();
+        User mockUser = User.builder()
+                .id(id)
+                .name(name)
+                .level(50L)
+                .restaurantId(369L)
+                .build();
 
         given(userService.authenticate(email, password)).willReturn(mockUser);
 
-        given(jwtUtil.createToken(id, name)).willReturn("header.payload.signature");
+        given(jwtUtil.createToken(id, name, 369L)).willReturn("header.payload.signature");
 
         mvc.perform(post("/session")
                 .contentType(MediaType.APPLICATION_JSON)

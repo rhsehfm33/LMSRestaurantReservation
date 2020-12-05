@@ -1,6 +1,5 @@
 package kr.co.fastcampus.eatgo;
 
-import kr.co.fastcampus.eatgo.filters.JwtAuthenticationFilter;
 import kr.co.fastcampus.eatgo.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
