@@ -1,6 +1,5 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
-import kr.co.fastcampus.eatgo.application.SessionResponseDto;
 import kr.co.fastcampus.eatgo.application.UserService;
 import kr.co.fastcampus.eatgo.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ public class SessionController {
     public ResponseEntity<SessionResponseDto> create(
             @RequestBody SessionRequestDto resource
     ) throws URISyntaxException {
-
         String email = resource.getEmail();
         String password = resource.getPassword();
 

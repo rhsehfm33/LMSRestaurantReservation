@@ -1,6 +1,5 @@
 package kr.co.fastcampus.eatgo.application;
 
-import kr.co.fastcampus.eatgo.application.EmailExistedException;
 import kr.co.fastcampus.eatgo.domain.UserRepository;
 import kr.co.fastcampus.eatgo.interfaces.User;
 import org.junit.Before;
@@ -35,30 +34,33 @@ public class UserServiceTests {
         userService = new UserService(userRepository, passwordEncoder);
     }
 
-    @Test
-    public void registerUser() {
-        String email = "tester@example.com";
-        String name = "Tester";
+    @Test(expected = EmailNotExistedException.class)
+    public void authenticateWithNotExistedEmail() {
+        String email = "x@example.com";
         String password = "test";
 
-        userService.registerUser(email, name, password);
+        given(userRepository.findByEmail(email))
+                .willReturn(Optional.empty());
 
-        verify(userRepository).save(any());
+        User user = userService.authenticate(email, password);
+
+        assertThat(user.getEmail(), is(email));
     }
 
-    @Test(expected=EmailExistedException.class)
-    public void registerUserWithExistedEmail() {
+    @Test(expected = PasswordWrongException.class)
+    public void authenticateWithWrongPassword() {
         String email = "tester@example.com";
-        String name = "Tester";
-        String password = "test";
+        String password = "x";
 
-        User user = User.builder().build();
-        given(userRepository.findByEmail(email)).willReturn(Optional.of(user));
+        User mockUser = User.builder().email(email).password(password).build();
+        given(userRepository.findByEmail(email))
+                .willReturn(Optional.of(mockUser));
 
-        given(passwordEncoder.matches(any(), any())).willReturn(true);
+        given(passwordEncoder.matches(any(), any())).willReturn(false);
 
-        userService.registerUser(email, name, password);
+        User user = userService.authenticate(email, password);
 
-        verify(userRepository, never()).save(any());
+        assertThat(user.getEmail(), is(email));
     }
+
 }
