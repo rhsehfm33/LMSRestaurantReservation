@@ -1,23 +1,57 @@
-# Getting Started
+# EatGo
 
-### Reference Documentation
-For further reference, please consider the following sections:
+[![Build Status](https://travis-ci.org/ahastudio/fastcampus-eatgo.svg?branch=master)](https://travis-ci.org/ahastudio/fastcampus-eatgo)
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.0/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.4.0/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.0/reference/htmlsingle/#boot-features-developing-web-applications)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.4.0/reference/htmlsingle/#using-boot-devtools)
+## Test all
 
-### Guides
-The following guides illustrate how to use some features concretely:
+```bash
+SPRING_PROFILES_ACTIVE=test ./gradlew cleanTest test
+```
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+Window
+Use intellij build option
 
-### Additional Links
-These additional references should also help you:
+## Build JAR
 
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+```bash
+./gradlew bootJar
+```
 
+window
+gradlew bootJar
+
+## Install dependencies for web
+
+```bash
+bash -c "cd eatgo-admin-web && npm install"
+bash -c "cd eatgo-customer-web && npm install"
+bash -c "cd eatgo-restaurant-web && npm install"
+```
+
+Window
+cd eatgo-admin-web && npm install && cd../
+cd eatgo-customer-web && npm install && cd../
+cd eatgo-restaurant-web && npm install && cd../
+
+
+
+!!!! run.sh 파일 LF로 저장하세요.
+
+````
+
+## Run with Docker
+
+```bash
+# Docker용 환경 설정 파일을 복사합니다.
+# .env 파일은 필요에 따라 수정해서 사용하시면 됩니다.
+cp .env.default .env
+
+# 컨테이너를 모두 실행합니다.
+docker-compose up
+````
+
+웹 프론트엔드 확인:
+
+- Admin: <http://localhost:8082/>
+- Customer: <http://localhost:8083/>
+- Restaurant: <http://localhost:8084/>
