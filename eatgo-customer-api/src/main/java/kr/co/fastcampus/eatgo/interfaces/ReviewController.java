@@ -6,6 +6,7 @@ import kr.co.fastcampus.eatgo.domain.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ReviewController {
 
@@ -23,7 +25,7 @@ public class ReviewController {
     public ResponseEntity<?> create(
             Authentication authentication,
             @PathVariable Long restaurantsId,
-            @Valid @RequestBody Review resource
+            @Validated @RequestBody Review resource
     ) throws URISyntaxException {
         Claims claims = (Claims) authentication.getPrincipal();
 

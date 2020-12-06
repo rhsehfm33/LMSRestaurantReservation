@@ -1,14 +1,13 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
 import kr.co.fastcampus.eatgo.application.UserService;
+import kr.co.fastcampus.eatgo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sun.net.ftp.FtpDirEntry;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping(produces = "application/json;charset=utf-8")
@@ -57,11 +56,4 @@ public class UserController {
         userService.deactiveUser(id);
         return "{}";
     }
-
-    // 1. User list
-    // 2. User create -> 회원 가입
-    // 3. User update
-    // 4. User delete -> level: 0 => 아무 것도 못함
-    // (1: customer, 2: restaurant owner, 3: admin)
-
 }

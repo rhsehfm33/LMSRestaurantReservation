@@ -6,10 +6,11 @@
     const element = document.getElementById('app');
     element.innerHTML = `
         ${restaurants.map(restaurant => `
-            ${restaurant.id}
-            ${restaurant.name}
-            ${restaurant.address}
-            <br>
+            <p>
+                ${restaurant.id}
+                ${restaurant.name}
+                ${restaurant.address}
+            </p>
         `).join('')}
     `;
 })();

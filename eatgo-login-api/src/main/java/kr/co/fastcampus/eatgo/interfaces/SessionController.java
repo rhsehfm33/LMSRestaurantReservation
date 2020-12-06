@@ -1,16 +1,17 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
 import kr.co.fastcampus.eatgo.application.UserService;
+import kr.co.fastcampus.eatgo.domain.User;
 import kr.co.fastcampus.eatgo.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@CrossOrigin
 @RestController
 public class SessionController {
 
@@ -32,13 +33,13 @@ public class SessionController {
         String accessToken = jwtUtil.createToken(
                 user.getId(),
                 user.getName(),
-                user.isRestaurantOwner() ? user.getRestaurantId() : null
-        );
+                user.isRestaurantOwner() ? user.getRestaurantId() : null);
 
-        SessionResponseDto sessionDto = SessionResponseDto.builder()
-                .accessToken(accessToken)
-                .build();
         String url = "/session";
-        return ResponseEntity.created(new URI(url)).body(sessionDto);
+        return ResponseEntity.created(new URI(url)).body(
+                SessionResponseDto.builder()
+                        .accessToken(accessToken)
+                        .build());
     }
+
 }

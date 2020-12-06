@@ -1,11 +1,8 @@
 package kr.co.fastcampus.eatgo.application;
 
-import kr.co.fastcampus.eatgo.application.EmailExistedException;
 import kr.co.fastcampus.eatgo.domain.UserRepository;
-import kr.co.fastcampus.eatgo.interfaces.User;
+import kr.co.fastcampus.eatgo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

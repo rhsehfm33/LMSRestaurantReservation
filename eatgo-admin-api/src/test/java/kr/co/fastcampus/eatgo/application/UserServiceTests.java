@@ -1,7 +1,7 @@
 package kr.co.fastcampus.eatgo.application;
 
 import kr.co.fastcampus.eatgo.domain.UserRepository;
-import kr.co.fastcampus.eatgo.interfaces.User;
+import kr.co.fastcampus.eatgo.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

@@ -1,5 +1,6 @@
 package kr.co.fastcampus.eatgo.interfaces;
 
+import kr.co.fastcampus.eatgo.domain.User;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
