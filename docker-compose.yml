@@ -64,6 +64,8 @@ services:
       - ./eatgo-admin-web:/home/eatgo
     ports:
       - 8082:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - VUE_APP_API_BASE_URL=http://host.docker.internal:8002
       - VUE_APP_LOGIN_API_BASE_URL=http://host.docker.internal:8001
@@ -78,6 +80,8 @@ services:
       - ./eatgo-customer-web:/home/eatgo
     ports:
       - 8083:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - VUE_APP_API_BASE_URL=http://host.docker.internal:8003
       - VUE_APP_LOGIN_API_BASE_URL=http://host.docker.internal:8001
@@ -92,6 +96,8 @@ services:
       - ./eatgo-restaurant-web:/home/eatgo
     ports:
       - 8084:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - VUE_APP_API_BASE_URL=http://host.docker.internal:8004
       - VUE_APP_LOGIN_API_BASE_URL=http://host.docker.internal:8001
