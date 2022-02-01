@@ -97,8 +97,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - VUE_APP_API_BASE_URL=http://localhost:8002
-      - VUE_APP_LOGIN_API_BASE_URL=http://localhost:8001
+      - VUE_APP_API_BASE_URL=http://chit-chat.codeend.site:8002
+      - VUE_APP_LOGIN_API_BASE_URL=http://chit-chat.codeend.site:8001
     command: bash -c "cd /home/eatgo && npm run serve"
     healthcheck:
       test: curl -sS http://localhost:8080 || exit 1
@@ -114,8 +114,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
-      - VUE_APP_API_BASE_URL=http://localhost:8003
-      - VUE_APP_LOGIN_API_BASE_URL=http://localhost:8001
+      - VUE_APP_API_BASE_URL=http://chit-chat.codeend.site:8003
+      - VUE_APP_LOGIN_API_BASE_URL=http://chit-chat.codeend.site:8001
     command: bash -c "cd /home/eatgo && npm run serve"
     healthcheck:
       test: curl -sS http://localhost:8080 || exit 1
@@ -129,8 +129,8 @@ services:
     ports:
       - 8084:3000
     environment:
-      - VUE_APP_API_BASE_URL=http://localhost:8004
-      - VUE_APP_LOGIN_API_BASE_URL=http://localhost:8001
+      - VUE_APP_API_BASE_URL=http://chit-chat.codeend.site:8004
+      - VUE_APP_LOGIN_API_BASE_URL=http://chit-chat.codeend.site:8001
     command: bash -c "cd /home/eatgo && npm run serve"
     healthcheck:
       test: curl -sS http://localhost:8080 || exit 1
