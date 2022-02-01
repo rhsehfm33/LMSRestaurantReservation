@@ -7,6 +7,8 @@ services:
       - ./data/mariadb:/var/lib/mysql
     ports:
       - 13306:3306
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: |
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
@@ -22,6 +24,8 @@ services:
       - ./eatgo-login-api/build/libs:/home/eatgo/libs
     ports:
       - 8001:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mysql
     command: bash -c "cd /home/eatgo && sh run.sh"
@@ -33,6 +37,8 @@ services:
       - ./eatgo-admin-api/build/libs:/home/eatgo/libs
     ports:
       - 8002:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mysql
     command: bash -c "cd /home/eatgo && sh run.sh"
@@ -44,6 +50,8 @@ services:
       - ./eatgo-customer-api/build/libs:/home/eatgo/libs
     ports:
       - 8003:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mysql
     command: bash -c "cd /home/eatgo && sh run.sh"
@@ -55,6 +63,8 @@ services:
       - ./eatgo-restaurant-api/build/libs:/home/eatgo/libs
     ports:
       - 8004:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mysql
     command: bash -c "cd /home/eatgo && sh run.sh"
@@ -64,6 +74,8 @@ services:
       - ./eatgo-admin-web:/home/eatgo
     ports:
       - 8082:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - VUE_APP_API_BASE_URL=http://host.docker.internal:8002
       - VUE_APP_LOGIN_API_BASE_URL=http://host.docker.internal:8001
@@ -78,6 +90,8 @@ services:
       - ./eatgo-customer-web:/home/eatgo
     ports:
       - 8083:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - VUE_APP_API_BASE_URL=http://host.docker.internal:8003
       - VUE_APP_LOGIN_API_BASE_URL=http://host.docker.internal:8001
@@ -92,6 +106,8 @@ services:
       - ./eatgo-restaurant-web:/home/eatgo
     ports:
       - 8084:3000
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       - VUE_APP_API_BASE_URL=http://host.docker.internal:8004
       - VUE_APP_LOGIN_API_BASE_URL=http://host.docker.internal:8001
